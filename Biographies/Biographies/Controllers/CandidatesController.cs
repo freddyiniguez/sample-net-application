@@ -1,14 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Biographies.Infrastructure.Abstract;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Biographies.Controllers
 {
     public class CandidatesController : ApiController
     {
+        ICandidatesRepository _ICandidatesRepository;
+
+        // Constructor
+        public CandidatesController(ICandidatesRepository iCandidatesRepository)
+        {
+            _ICandidatesRepository = iCandidatesRepository;
+        }
+
         // GET: api/Candidates
         public IEnumerable<string> Get()
         {
-            return new string[] { "candidate1", "candidate2" };
+            return _ICandidatesRepository.GetCandidates();
         }
 
         // GET: api/Candidates/5

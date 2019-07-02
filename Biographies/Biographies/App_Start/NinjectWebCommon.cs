@@ -5,7 +5,10 @@ namespace Biographies.App_Start
 {
     using System;
     using System.Web;
-
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using Biographies.Infrastructure.Abstract;
+    using Biographies.Infrastructure.Concrete;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -46,6 +49,8 @@ namespace Biographies.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                GlobalConfiguration.Configuration.DependencyResolver = new LocalNinjectDependencyResolver(kernel);
                 return kernel;
             }
             catch
@@ -61,6 +66,8 @@ namespace Biographies.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            // Candidates dependency injection.
+            kernel.Bind<ICandidatesRepository>().To<EFCandidatesRepository>();
         }        
     }
 }
