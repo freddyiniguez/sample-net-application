@@ -7,5 +7,6 @@ namespace Biographies.Infrastructure.Abstract
     {
         List<CandidateModel> GetCandidates();
         CandidateModel GetCandidate(int id);
+        ResponseModel CreateCandidate(CandidateModel Candidate);
     }
 }
