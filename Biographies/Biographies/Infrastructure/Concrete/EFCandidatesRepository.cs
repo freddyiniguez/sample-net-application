@@ -51,8 +51,28 @@ namespace Biographies.Infrastructure.Concrete
             }
             catch (Exception ex)
             {
-                Helpers.Utils.RegisterException("GetCandidatesRepository: GetCandidates", ex.Message);
+                Helpers.Utils.RegisterException("CandidatesRepository: GetCandidates", ex.Message);
                 return new List<CandidateModel>();
+            }
+        }
+
+
+        public CandidateModel GetCandidate(int id)
+        {
+            try
+            {
+                // TODO: Uncomment the following line after testing.
+                return new CandidateModel();
+                var _SpResponse = _Context.sp_bios_candidates_getById(id).ToList();
+
+                List<CandidateModel> Candidates = _IMapper.Map<List<sp_bios_candidates_getById_Result>, List<CandidateModel>>(_SpResponse);
+
+                return Candidates.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Helpers.Utils.RegisterException("CandidatesRepository: GetCandidate", ex.Message);
+                return new CandidateModel();
             }
         }
     }

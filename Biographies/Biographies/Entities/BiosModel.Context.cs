@@ -93,5 +93,14 @@ namespace Biographies.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_bios_candidates_get_Result>("sp_bios_candidates_get");
         }
+    
+        public virtual ObjectResult<sp_bios_candidates_getById_Result> sp_bios_candidates_getById(Nullable<int> idCandidate)
+        {
+            var idCandidateParameter = idCandidate.HasValue ?
+                new ObjectParameter("IdCandidate", idCandidate) :
+                new ObjectParameter("IdCandidate", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_bios_candidates_getById_Result>("sp_bios_candidates_getById", idCandidateParameter);
+        }
     }
 }

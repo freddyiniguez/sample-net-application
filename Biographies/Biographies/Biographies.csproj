@@ -205,12 +205,16 @@
     <Compile Include="Entities\sp_bios_candidates_create_Result.cs">
       <DependentUpon>BiosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\sp_bios_candidates_getById_Result.cs">
+      <DependentUpon>BiosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\sp_bios_candidates_get_Result.cs">
       <DependentUpon>BiosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ResponseFactory.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Infrastructure\Abstract\ICandidatesRepository.cs" />
     <Compile Include="Infrastructure\Concrete\EFCandidatesRepository.cs" />

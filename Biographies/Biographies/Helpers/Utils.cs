@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Biographies.Models;
+using log4net;
 
 namespace Biographies.Helpers
 {
@@ -19,6 +20,17 @@ namespace Biographies.Helpers
         public static void RegisterException(string Method, string Message)
         {
             logger.Error("Got an exception at " + Method + ". Exception message: " + Message);
+        }
+
+
+        /// <summary>
+        /// ErrorCodes
+        /// </summary>
+        public enum ErrorCodes : int
+        {
+            SUCCESS = 0,
+            ERROR = -1,
+            EXCEPTION = -99
         }
     }
 }

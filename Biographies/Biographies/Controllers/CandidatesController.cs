@@ -17,23 +17,53 @@ namespace Biographies.Controllers
         }
 
         // GET: api/Candidates
-        public List<CandidateModel> Get()
+        public ResponseModel Get()
         {
             try
             {
-                return _ICandidatesRepository.GetCandidates();
+                List<CandidateModel> Candidates = _ICandidatesRepository.GetCandidates();
+
+                if (Candidates.Count > 0)
+                {
+                    ResponseModel SuccessResponse = Helpers.ResponseFactory.Create(true);
+                    SuccessResponse.Object = Candidates;
+                    return SuccessResponse;
+                }
+
+                ResponseModel ErrorResponse = Helpers.ResponseFactory.Create(false);
+                ErrorResponse.Message = "No se encontraron resultados.";
+                return ErrorResponse;
             }
             catch (Exception ex)
             {
                 Helpers.Utils.RegisterException("Candidates: Get", ex.Message);
-                return new List<CandidateModel>();
+                return Helpers.ResponseFactory.Create(false);
             }
         }
 
         // GET: api/Candidates/5
-        public string Get(int id)
+        public ResponseModel Get(int id)
         {
-            return "value";
+            try
+            {
+                CandidateModel Candidate = _ICandidatesRepository.GetCandidate(id);
+                
+                if (Candidate.IdCandidate != 0)
+                {
+                    ResponseModel SuccessResponse = Helpers.ResponseFactory.Create(true);
+                    SuccessResponse.Object = Candidate;
+                    return SuccessResponse;
+                }
+
+                ResponseModel ErrorResponse = Helpers.ResponseFactory.Create(false);
+                ErrorResponse.Message = "No se encontraron resultados.";
+                return ErrorResponse;
+            }
+            catch (Exception ex)
+            {
+                Helpers.Utils.RegisterException("Candidates: Get", ex.Message);
+                return Helpers.ResponseFactory.Create(false);
+            }
         }
 
         // POST: api/Candidates
