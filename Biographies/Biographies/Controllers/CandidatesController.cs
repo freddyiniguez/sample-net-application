@@ -1,5 +1,6 @@
 ﻿using Biographies.Infrastructure.Abstract;
 using Biographies.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -18,7 +19,15 @@ namespace Biographies.Controllers
         // GET: api/Candidates
         public List<CandidateModel> Get()
         {
-            return _ICandidatesRepository.GetCandidates();
+            try
+            {
+                return _ICandidatesRepository.GetCandidates();
+            }
+            catch (Exception ex)
+            {
+                Helpers.Utils.RegisterException("Candidates: Get", ex.Message);
+                return new List<CandidateModel>();
+            }
         }
 
         // GET: api/Candidates/5

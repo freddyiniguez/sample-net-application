@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Biographies.Entities;
 using Biographies.Infrastructure.Abstract;
 using Biographies.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Biographies.Infrastructure.Concrete
 {
@@ -40,11 +41,19 @@ namespace Biographies.Infrastructure.Concrete
         /// <returns></returns>
         public List<CandidateModel> GetCandidates()
         {
-            var _SpResponse = _Context.sp_bios_candidates_get().ToList();
+            try
+            {
+                var _SpResponse = _Context.sp_bios_candidates_get().ToList();
 
-            List<CandidateModel> Candidates = _IMapper.Map<List<sp_bios_candidates_get_Result>, List<CandidateModel>>(_SpResponse);
+                List<CandidateModel> Candidates = _IMapper.Map<List<sp_bios_candidates_get_Result>, List<CandidateModel>>(_SpResponse);
 
-            return Candidates;
+                return Candidates;
+            }
+            catch (Exception ex)
+            {
+                Helpers.Utils.RegisterException("GetCandidatesRepository: GetCandidates", ex.Message);
+                return new List<CandidateModel>();
+            }
         }
     }
 }
