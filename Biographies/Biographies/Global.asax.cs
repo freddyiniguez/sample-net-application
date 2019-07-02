@@ -10,10 +10,6 @@ namespace Biographies
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            // Dependency injection using Ninject
-            //ControllerBuilder.Current.SetControllerFactory(new Ninject);
-
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

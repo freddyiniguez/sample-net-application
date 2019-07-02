@@ -13,6 +13,7 @@ namespace Biographies.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using WebApiContrib.IoC.Ninject;
 
     public static class NinjectWebCommon 
     {
@@ -50,7 +51,7 @@ namespace Biographies.App_Start
 
                 RegisterServices(kernel);
 
-                GlobalConfiguration.Configuration.DependencyResolver = new LocalNinjectDependencyResolver(kernel);
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
                 return kernel;
             }
             catch
