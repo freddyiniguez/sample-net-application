@@ -3,16 +3,14 @@
 
 namespace Biographies.App_Start
 {
-    using System;
-    using System.Web;
-    using System.Web.Http;
-    using System.Web.Mvc;
     using Biographies.Infrastructure.Abstract;
     using Biographies.Infrastructure.Concrete;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
+    using System;
+    using System.Web;
+    using System.Web.Http;
     using WebApiContrib.IoC.Ninject;
 
     public static class NinjectWebCommon 
@@ -51,6 +49,8 @@ namespace Biographies.App_Start
 
                 RegisterServices(kernel);
 
+                // Ninject
+                // The following line is added to make Ninject work correctly.
                 GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
                 return kernel;
             }

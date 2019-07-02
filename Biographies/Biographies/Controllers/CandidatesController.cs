@@ -1,4 +1,5 @@
 ﻿using Biographies.Infrastructure.Abstract;
+using Biographies.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -15,7 +16,7 @@ namespace Biographies.Controllers
         }
 
         // GET: api/Candidates
-        public IEnumerable<string> Get()
+        public List<CandidateModel> Get()
         {
             return _ICandidatesRepository.GetCandidates();
         }

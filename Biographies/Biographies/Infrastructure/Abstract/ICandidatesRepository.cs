@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Biographies.Models;
+using System.Collections.Generic;
 
 namespace Biographies.Infrastructure.Abstract
 {
     public interface ICandidatesRepository
     {
-        IEnumerable<string> GetCandidates();
+        List<CandidateModel> GetCandidates();
     }
 }

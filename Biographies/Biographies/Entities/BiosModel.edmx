@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BiosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="sp_bios_candidates_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="SecondName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="SecondLastName" Type="varchar" Mode="In" />
+          <Parameter Name="ShortName" Type="varchar" Mode="In" />
+          <Parameter Name="BirthDate" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Cellphone" Type="varchar" Mode="In" />
+          <Parameter Name="FOJ" Type="int" Mode="In" />
+          <Parameter Name="Location" Type="int" Mode="In" />
+          <Parameter Name="Site" Type="int" Mode="In" />
+          <Parameter Name="Market" Type="int" Mode="In" />
+          <Parameter Name="Hashtag" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_bios_candidates_get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="BiosModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BiosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BiosEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="sp_bios_candidates_create" ReturnType="Collection(BiosModel.sp_bios_candidates_create_Result)">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="SecondName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="SecondLastName" Mode="In" Type="String" />
+            <Parameter Name="ShortName" Mode="In" Type="String" />
+            <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Cellphone" Mode="In" Type="String" />
+            <Parameter Name="FOJ" Mode="In" Type="Int32" />
+            <Parameter Name="Location" Mode="In" Type="Int32" />
+            <Parameter Name="Site" Mode="In" Type="Int32" />
+            <Parameter Name="Market" Mode="In" Type="Int32" />
+            <Parameter Name="Hashtag" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_bios_candidates_get" ReturnType="Collection(BiosModel.sp_bios_candidates_get_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sp_bios_candidates_create_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="38" />
+          <Property Type="Int32" Name="Code" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_bios_candidates_get_Result">
+          <Property Type="Int32" Name="IdCandidate" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SecondName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SecondLastName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Cellphone" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="FOJ" Nullable="true" />
+          <Property Type="Int32" Name="Location" Nullable="true" />
+          <Property Type="Int32" Name="Site" Nullable="true" />
+          <Property Type="Int32" Name="Market" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BiosModelStoreContainer" CdmEntityContainer="BiosEntities" >
+          <FunctionImportMapping FunctionImportName="sp_bios_candidates_create" FunctionName="BiosModel.Store.sp_bios_candidates_create">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BiosModel.sp_bios_candidates_create_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_bios_candidates_get" FunctionName="BiosModel.Store.sp_bios_candidates_get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BiosModel.sp_bios_candidates_get_Result">
+                <ScalarProperty Name="IdCandidate" ColumnName="IdCandidate" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SecondLastName" ColumnName="SecondLastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="FOJ" ColumnName="FOJ" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Market" ColumnName="Market" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
