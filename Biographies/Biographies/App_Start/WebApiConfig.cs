@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
 using System.Web.Http;
 
 namespace Biographies
@@ -10,6 +8,11 @@ namespace Biographies
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.EnableSystemDiagnosticsTracing();
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -22,3 +25,6 @@ namespace Biographies
         }
     }
 }
+
+
+
