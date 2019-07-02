@@ -30,7 +30,6 @@ namespace Biographies.Infrastructure.Concrete
             });
 
             _IMapper = config.CreateMapper();
-
         }
 
 
@@ -61,13 +60,18 @@ namespace Biographies.Infrastructure.Concrete
         {
             try
             {
-                // TODO: Uncomment the following line after testing.
-                return new CandidateModel();
                 var _SpResponse = _Context.sp_bios_candidates_getById(id).ToList();
+                var _SpResult = _SpResponse.FirstOrDefault();
 
-                List<CandidateModel> Candidates = _IMapper.Map<List<sp_bios_candidates_getById_Result>, List<CandidateModel>>(_SpResponse);
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<sp_bios_candidates_getById_Result, CandidateModel>();
+                });
+                IMapper LocalMapper = config.CreateMapper();
 
-                return Candidates.FirstOrDefault();
+                CandidateModel Candidate = LocalMapper.Map<sp_bios_candidates_getById_Result, CandidateModel>(_SpResult);
+
+                return Candidate;
             }
             catch (Exception ex)
             {
